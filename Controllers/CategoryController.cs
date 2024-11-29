@@ -1,8 +1,5 @@
 ﻿using NimapInfoMachineTest.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace NimapInfoMachineTest.Controllers
@@ -30,6 +27,7 @@ namespace NimapInfoMachineTest.Controllers
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
+                TempData["Message"] = "Category added successfully!";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -50,6 +48,7 @@ namespace NimapInfoMachineTest.Controllers
             {
                 db.Entry(category).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
+                TempData["Message"] = "Category updated successfully!";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -69,6 +68,7 @@ namespace NimapInfoMachineTest.Controllers
             var category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
+            TempData["Message"] = "Category deleted successfully!";
             return RedirectToAction("Index");
         }
 

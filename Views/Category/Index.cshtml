@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Category List";
 }
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}
 
 <div class="container mt-5">
     <h2 class="text-center text-primary mb-4">Category List</h2>

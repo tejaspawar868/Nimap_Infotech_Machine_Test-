@@ -42,12 +42,13 @@ namespace NimapInfoMachineTest.Controllers
                 {
                     db.Products.Add(product);
                     db.SaveChanges();
+                    TempData["Message"] = "Product added successfully!";
                     return RedirectToAction("Index");
                 }
 
                 ModelState.AddModelError("CategoryId", "Invalid Category selected.");
             }
-
+            TempData["Message"] = "Failed to add product. Please check the details.";
             ViewBag.Categories = db.Categories.ToList();
             return View(product);
         }
@@ -70,9 +71,10 @@ namespace NimapInfoMachineTest.Controllers
             {
                 db.Entry(product).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
+                TempData["Message"] = "Product updated successfully!";
                 return RedirectToAction("Index");
             }
-
+            TempData["Message"] = "Failed to update product. Please check the details.";
             ViewBag.Categories = db.Categories.ToList();
             return View(product);
         }
@@ -91,6 +93,7 @@ namespace NimapInfoMachineTest.Controllers
             var product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
+            TempData["Message"] = "Product deleted successfully!";
             return RedirectToAction("Index");
         }
     }

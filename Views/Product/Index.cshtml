@@ -7,7 +7,12 @@
     var totalRecords = ViewBag.TotalRecords as int? ?? 0;
     var totalPages = (int)Math.Ceiling((decimal)totalRecords / pageSize);
 }
-
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
@@ -58,15 +63,15 @@
                 </tbody>
             </table>
 
-            
+
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                   
+
                     <li class="page-item @(page <= 1 ? "disabled" : "")">
                         <a class="page-link" href="@Url.Action("Index", new { page = page - 1, pageSize = pageSize })" tabindex="-1">Previous</a>
                     </li>
 
-                   
+
                     @for (int i = 1; i <= totalPages; i++)
                     {
                         <li class="page-item @(i == page ? "active" : "")">
@@ -74,7 +79,7 @@
                         </li>
                     }
 
-                   
+
                     <li class="page-item @(page >= totalPages ? "disabled" : "")">
                         <a class="page-link" href="@Url.Action("Index", new { page = page + 1, pageSize = pageSize })">Next</a>
                     </li>
